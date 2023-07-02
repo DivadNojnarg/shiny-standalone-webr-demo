@@ -1,30 +1,37 @@
 # Define UI for app that draws a histogram ----
-ui <- fluidPage(
-
-  # App title ----
-  titlePanel("Hello Shiny!"),
-
-  # Sidebar layout with input and output definitions ----
-  sidebarLayout(
-
-    # Sidebar panel for inputs ----
-    sidebarPanel(
-
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
-
-    ),
-
-    # Main panel for displaying outputs ----
-    mainPanel(
-
-      # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
-
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody(
+    box(
+      title = "Closable Box with dropdown",
+      closable = TRUE,
+      width = 12,
+      status = "warning",
+      solidHeader = FALSE,
+      collapsible = TRUE,
+      label = boxLabel(
+        text = 1,
+        status = "danger"
+      ),
+      dropdownMenu = boxDropdown(
+        boxDropdownItem("Link to google", href = "https://www.google.com"),
+        boxDropdownItem("item 2", href = "#"),
+        dropdownDivider(),
+        boxDropdownItem("item 3", href = "#", icon = icon("table-cells"))
+      ),
+      sidebar = boxSidebar(
+        startOpen = TRUE,
+        id = "mycardsidebar",
+        sliderInput(
+          "obs",
+          "Number of observations:",
+          min = 0,
+          max = 1000,
+          value = 500
+        )
+      ),
+      plotOutput("distPlot")
     )
   )
 )
