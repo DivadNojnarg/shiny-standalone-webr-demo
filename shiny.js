@@ -105,11 +105,12 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
 
   // Install and run shiny
   await webR.evalRVoid(`webr::install("shiny", repos="${window.location.href}/repo/")`);
+  await webR.evalRVoid(`webr::install("bs4Dash", repos="${window.location.href}/repo/")`);
   webR.writeConsole(`
     library(shiny)
     library(bs4Dash)
     options(shiny.trace = TRUE)
-    runApp('app', display.mode = 'showcase')
+    runApp('app')
   `);
 
   // Setup listener for service worker messages
