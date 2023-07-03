@@ -47,6 +47,11 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
   }
 
   // Initialise webR with a local package repo
+  $.busyLoadFull("show", {
+    background: "#5e626b",
+    spinner: "circles",
+    animation: "slide"
+  });
   const webR = new WebR();
   await webR.init();
   console.log("webR init OK");
@@ -165,4 +170,5 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
 
   // Hide the loading div
   document.getElementById('loading').style.display = "none";
+  $.busyLoadFull("hide");
 });
