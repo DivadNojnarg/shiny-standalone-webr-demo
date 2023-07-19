@@ -3,6 +3,8 @@ ui <- dashboardPage(
   dashboardHeader(),
   dashboardSidebar(),
   dashboardBody(
+    tracker$include(),
+    trackingModalBS4(),
     box(
       title = "Closable Box with dropdown",
       closable = TRUE,

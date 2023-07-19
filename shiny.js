@@ -109,11 +109,18 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
   await fetchToWebR('app/server.R', '/home/web_user/app/server.R');
 
   // Install and run shiny
-  await webR.evalRVoid(`webr::install("shiny", repos="${window.location.href}/repo/")`);
-  await webR.evalRVoid(`webr::install("bs4Dash", repos="${window.location.href}/repo/")`);
+  await webR.evalRVoid(`
+    webr::install(c("shiny", "bs4Dash", "shinymetrics"), repos="${window.location.href}/repo/")
+  `);
   webR.writeConsole(`
     library(shiny)
     library(bs4Dash)
+    library(shinymetrics)
+    
+    tracker <- Shinymetrics$
+      new(token = "PJL76EWNDPG7HGIJWMTZRYTOIY")$
+      track_recommended()
+    
     options(shiny.trace = TRUE)
     runApp('app')
   `);
@@ -163,12 +170,13 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
   iframe.style.left = 0;
   iframe.style.right = 0;
   iframe.style.width = '100%';
-  iframe.style.height = '80%';
+  iframe.style.height = '100%';
   document.body.appendChild(iframe);
   // Install the websocket proxy for chatting to httpuv
   iframe.contentWindow.WebSocket = WebSocketProxy;
 
   // Hide the loading div
   document.getElementById('loading').style.display = "none";
+  document.getElementById('console').style.display = "none";
   $.busyLoadFull("hide");
 });
