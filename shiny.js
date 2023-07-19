@@ -118,7 +118,7 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
     library(shinymetrics)
     
     tracker <- Shinymetrics$
-      new(token = "PJL76EWNDPG7HGIJWMTZRYTOIY")$
+      new(token = "PJL76EWNDPG7HGIJWMTZRYTOIY", prod = TRUE)$
       track_recommended()
     
     options(shiny.trace = TRUE)
