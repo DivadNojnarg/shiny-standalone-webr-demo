@@ -110,7 +110,7 @@ import('https://webr.r-wasm.org/latest/webr.mjs').then(async ({ WebR }) => {
 
   // Install and run shiny
   await webR.evalRVoid(`
-    webr::install(c("shiny", "bs4Dash", "shinymetrics"), repos="${window.location.href}/repo/")
+    webr::install(c("shiny", "bs4Dash", "shinymetrics"), repos="https://webr-cran.rinterface.com/")
   `);
   webR.writeConsole(`
     library(shiny)
